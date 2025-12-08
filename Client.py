@@ -47,7 +47,7 @@ class Client:
     def handle_viewer(self):
         connected_list = self.client_socket.recv(CHUNK_SIZE)
         data_received_dictionary = pickle.loads(connected_list)
-        print(data_received_dictionary.keys())
+        print(data_received_dictionary)
 
     def receive_data(self):
 

@@ -29,9 +29,6 @@ class MultiClientServer:
                 daemon=True
             )
             thread.start()
-            if self.handle_client(client_socket, addr) is False:
-                break
-
 
     def handle_client(self, client_socket , client_addr):
         try:
@@ -100,9 +97,6 @@ class MultiClientServer:
         """
         print("~~~")
 def     main():
-    #input(f"Enter ")
-    # thread = threading(target = handle_client , args = client_socket , client_addr)
-
     server = MultiClientServer(HOST, PORT)
     server.initiate_server()
 
