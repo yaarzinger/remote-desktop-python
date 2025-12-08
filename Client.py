@@ -38,6 +38,17 @@ class Client:
         else:
             print("Not connected to a server.")
 
+
+    def handle_sender(self):
+
+        print("..")
+
+
+    def handle_viewer(self):
+        connected_list = self.client_socket.recv(CHUNK_SIZE)
+        data_received_dictionary = pickle.loads(connected_list)
+        print(data_received_dictionary.keys())
+
     def receive_data(self):
 
         if self.client_socket:
@@ -60,9 +71,22 @@ class Client:
     def handle_client(self):
         try:
             while True:
-                data = input("Enter data to send to the server: ")
+                data = input("Enter start command for initiation program : ")
                 self.send_data(data)
                 received_data = self.receive_data()
+                role = input(received_data)
+                if role.lower() == "sender":
+                    self.send_data(role)
+                    self.handle_sender()
+
+                elif role.lower() == "viewer":
+                    self.send_data(role)
+                    self.handle_viewer()
+
+
+
+
+
         except socket.error as e:
             print("error handling client", e)
             return False
