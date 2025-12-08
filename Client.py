@@ -19,6 +19,7 @@ class Client:
         try:
             self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.client_socket.connect((self.host, self.port))
+            print("initiating connection")
             print(f"Connected to server at  {self.host}:{self.port}")
 
             self.handle_client()
@@ -26,7 +27,6 @@ class Client:
         except socket.error as sock_error:
             print(f"socket error on connection - {sock_error}")
             return False
-
 
     def send_data(self, data):
         if self.client_socket:
@@ -66,9 +66,6 @@ class Client:
         except socket.error as e:
             print("error handling client", e)
             return False
-
-
-
 
 
 def main():
