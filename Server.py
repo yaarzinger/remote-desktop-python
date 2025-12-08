@@ -21,7 +21,14 @@ class MultiClientServer:
         while True:
             client_socket, addr = self.server_socket.accept()
             print(f'[SERVER] + Client connected to server with {addr}')
-            self.connected_clients = {addr: ["Role not chosen", "Available"]}
+            self.connected_clients[addr] = ["Role not chosen", "Available"]
+
+            thread = threading.Thread(
+                target=self.handle_client,
+                args=(client_socket, addr),
+                daemon=True
+            )
+            thread.start()
             if self.handle_client(client_socket, addr) is False:
                 break
 
@@ -92,7 +99,7 @@ class MultiClientServer:
         :return:
         """
         print("~~~")
-def main():
+def     main():
     #input(f"Enter ")
     # thread = threading(target = handle_client , args = client_socket , client_addr)
 
